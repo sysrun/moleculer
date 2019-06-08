@@ -13,4 +13,7 @@ function now() {
 const loadNs = now();
 const loadMs = Date.now();
 
-module.exports = () => loadMs + now() - loadNs;
+module.exports = () => {
+  return Date.now();
+  //loadMs + now() - loadNs;
+}
