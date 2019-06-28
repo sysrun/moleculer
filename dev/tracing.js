@@ -60,12 +60,12 @@ const broker = new ServiceBroker({
 					baseURL: "http://192.168.0.181:9411",
 				}
 			},*/
-			/*{
+			{
 				type: "Jaeger",
 				options: {
 					host: "192.168.0.181",
 				}
-			}*/
+			},
 			/*{
 				type: "Event",
 				options: {
@@ -77,14 +77,6 @@ const broker = new ServiceBroker({
 		]
 	}
 });
-
-// Load Zipkin service
-/*broker.createService({
-	mixins: [JaegerService],
-	settings: {
-		host: "192.168.0.181"
-	}
-});*/
 
 const POSTS = [
 	{ id: 1, title: "First post", content: "Content of first post", author: 2 },
@@ -170,7 +162,11 @@ broker.createService({
 	actions: {
 		get: {
 			tracing: {
-				tags: ["id", "#loggedIn.username"],
+				tags: {
+					params: ["id"],
+					meta: ["loggedIn.username"],
+					response: ["friends"]
+				}
 			},
 			cache: {
 				enabled: true,
