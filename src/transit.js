@@ -6,9 +6,8 @@
 
 "use strict";
 
-const Promise 			= require("bluebird");
+const Promise 			= require("bluebird"); // eslint-disable-line
 const _ 				= require("lodash");
-const { generateToken } = require("./utils");
 
 const P 				= require("./packets");
 const { Packet } 		= require("./packets");
@@ -1036,7 +1035,7 @@ class Transit {
 	 * @memberof Transit
 	 */
 	sendPing(nodeID, id) {
-		return this.publish(new Packet(P.PACKET_PING, nodeID, { time: Date.now(), id: id || generateToken() }))
+		return this.publish(new Packet(P.PACKET_PING, nodeID, { time: Date.now(), id: id || this.broker.generateUid() }))
 			.catch(/* istanbul ignore next */ err => this.logger.error(`Unable to send PING packet to '${nodeID}' node.`, err));
 	}
 
