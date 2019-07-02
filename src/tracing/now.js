@@ -1,5 +1,5 @@
 const loadTime = getNanoSeconds();
-const nodeLoadTime = loadTime - process.uptime() * 1e9;
+const nodeLoadTime = loadTime; // - process.uptime() * 1e9;
 
 function getNanoSeconds() {
 	const time = process.hrtime();
